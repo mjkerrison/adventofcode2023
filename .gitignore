@@ -47,3 +47,11 @@ po/*~
 
 # RStudio Connect folder
 rsconnect/
+
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# Anything where I might have jotted down Advent of Code content, per their legal:
+*_text.R
+data/*
+!data/readme.txt
