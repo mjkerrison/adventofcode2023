@@ -1,11 +1,11 @@
 
 tidy_day_06_data <- function(raw_lines){
 
-  extract_digits <- \(x) x %>%
-    str_squish() %>%
-    str_split(" ") %>%
-    unlist() %>%
-    keep(\(y) str_detect(y, "[:digit:]")) %>%
+  extract_digits <- \(x) x |>
+    str_squish() |>
+    str_split(" ") |>
+    unlist() |>
+    keep(\(y) str_detect(y, "[:digit:]")) |>
     as.numeric()
 
   tibble(
@@ -14,7 +14,7 @@ tidy_day_06_data <- function(raw_lines){
 
     distance = extract_digits(raw_lines[2])
 
-  ) %>%
+  ) |>
 
     mutate(race = 1:n(), .before = 1)
 
@@ -29,18 +29,18 @@ expand_potential_strategies <- function(race_info_table){
   #          <= t_held * t_total - t_held^2
 
 
-  race_info_table %>%
+  race_info_table |>
 
-    group_by(race, time, distance) %>%
+    group_by(race, time, distance) |>
 
     reframe(
       t_held = 0:time,
       t_moving = time:0
-    ) %>%
+    ) |>
 
-    ungroup() %>%
+    ungroup() |>
 
-    mutate(d_travelled = t_held * t_moving) %>%
+    mutate(d_travelled = t_held * t_moving) |>
 
     mutate(beat_record = d_travelled > distance)
 
@@ -50,12 +50,12 @@ expand_potential_strategies <- function(race_info_table){
 
 reinterpret_day_06_data <- function(race_info_table){
 
-  race_info_table %>%
+  race_info_table |>
 
     summarise(
       race = 1,
-      time = paste(time, collapse = "") %>% as.numeric(),
-      distance = paste(distance, collapse = "") %>% as.numeric()
+      time = paste(time, collapse = "") |> as.numeric(),
+      distance = paste(distance, collapse = "") |> as.numeric()
     )
 
 }
@@ -91,15 +91,15 @@ pinpoint_winning_strategies <- function(reinterpreted_race_table){
   }
 
 
-  reinterpreted_race_table %>%
+  reinterpreted_race_table |>
 
     mutate(
 
       solutions = list(quaddie(a = -1, b = time, c = -1*distance))
 
-    ) %>%
+    ) |>
 
-    unnest_wider(solutions) %>%
+    unnest_wider(solutions) |>
 
     mutate(
 
@@ -118,7 +118,7 @@ pinpoint_winning_strategies <- function(reinterpreted_race_table){
 
       n_winning_solutions = max(c(negative, positive)) - min(c(negative, positive)) - 1
 
-    ) %>%
+    ) |>
 
     identity()
 

@@ -8,16 +8,16 @@ source("day_04_functions.R")
 
 raw_data <- read_lines("data/day_04.txt")
 
-processed_data <- raw_data %>%
+processed_data <- raw_data |>
 
   process_day_04_data()
 
 # Part 1 =======================================================================
 
-processed_data %>%
-  map(function(x){pluck(x, "value")}) %>%
-  unlist() %>%
-  sum() %>%
+processed_data |>
+  map(function(x){pluck(x, "value")}) |>
+  unlist() |>
+  sum() |>
   print()
 
 # Part 2 =======================================================================

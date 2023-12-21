@@ -23,13 +23,13 @@ calibration_strings <- read_lines("data/day_01.txt")
 
 # Part One =====================================================================
 
-calibration_strings %>%
+calibration_strings |>
 
-  extract_calibration_digits() %>%
+  extract_calibration_digits() |>
 
-  as.numeric() %>%
+  as.numeric() |>
 
-  reduce(sum) %>%
+  reduce(sum) |>
 
   print()
 
@@ -45,13 +45,13 @@ calibration_strings %>%
 # a new "digitify_strings" function.
 
 # Hey presto:
-calibration_strings %>%
+calibration_strings |>
 
-  digitify_strings() %>%
+  digitify_strings() |>
 
-  extract_calibration_digits() %>%
+  extract_calibration_digits() |>
 
-  as.numeric() %>%
+  as.numeric() |>
 
   sum()
 
@@ -93,13 +93,13 @@ const_search_string <- glue(
 
 # And basically all we need to do is *reverse the order of operations*!
 
-calibration_strings %>%
+calibration_strings |>
 
-  extract_calibration_digits(search_string = const_search_string) %>%
+  extract_calibration_digits(search_string = const_search_string) |>
 
-  digitify_strings() %>%
+  digitify_strings() |>
 
-  as.numeric() %>%
+  as.numeric() |>
 
   sum()
 
@@ -116,15 +116,15 @@ testing_tibble <- tibble(
 
   index = 1:length(calibration_strings),
 
-  version_1 = calibration_strings %>%
+  version_1 = calibration_strings |>
 
-    digitify_strings() %>%
+    digitify_strings() |>
 
     extract_calibration_digits(),
 
-  version_2 = calibration_strings %>%
+  version_2 = calibration_strings |>
 
-    extract_calibration_digits(search_string = const_search_string) %>%
+    extract_calibration_digits(search_string = const_search_string) |>
 
     digitify_strings(),
 
@@ -134,7 +134,7 @@ testing_tibble <- tibble(
 
 )
 
-testing_tibble %>% filter(mismatch) # %>% View()
+testing_tibble |> filter(mismatch) # |> View()
 
 # Part 2.2 =====================================================================
 
@@ -159,18 +159,18 @@ testing_tibble %>% filter(mismatch) # %>% View()
 # And what we'll do is retroactively tweak our extract_calibration_digits
 # function to take a different search function...
 
-calibration_strings %>%
+calibration_strings |>
 
   extract_calibration_digits(
     search_string = const_search_string,
     search_function = extract_without_consuming
-  ) %>%
+  ) |>
 
-  digitify_strings() %>%
+  digitify_strings() |>
 
-  as.numeric() %>%
+  as.numeric() |>
 
-  sum() %>%
+  sum() |>
 
   print()
 
@@ -185,13 +185,13 @@ calibration_strings %>%
 
 tictoc::tic()
 
-calibration_strings %>%
+calibration_strings |>
 
-  digitify_strings() %>%
+  digitify_strings() |>
 
-  extract_calibration_digits() %>%
+  extract_calibration_digits() |>
 
-  as.numeric() %>%
+  as.numeric() |>
 
   sum()
 
@@ -201,18 +201,18 @@ tictoc::toc() # 0.37 seconds for the original part 1 version
 
 tictoc::tic()
 
-calibration_strings %>%
+calibration_strings |>
 
   extract_calibration_digits(
     search_string = const_search_string,
     search_function = extract_without_consuming
-  ) %>%
+  ) |>
 
-  digitify_strings() %>%
+  digitify_strings() |>
 
-  as.numeric() %>%
+  as.numeric() |>
 
-  sum() %>%
+  sum() |>
 
   print()
 

@@ -33,10 +33,10 @@ all_maps <- set_names(
 
   dimensional_links,
 
-  dimensional_links %>%
+  dimensional_links |>
     map(\(x) paste(x, collapse = "_to_"))
 
-) %>%
+) |>
 
   map(function(x){
 
@@ -63,9 +63,9 @@ all_maps <- set_names(
 everything_joined <- join_everything(tbl_seeds,
                                      all_maps)
 
-everything_joined %>%
-  pull(location) %>%
-  min(na.rm = TRUE) %>%
+everything_joined |>
+  pull(location) |>
+  min(na.rm = TRUE) |>
   print()
 
 # Solving Part 2 ===============================================================
@@ -113,9 +113,9 @@ tbl_seeds_v2 <- fetch_seed_table_v2(raw_data)
 everything_joined_v2 <- join_everything(tbl_seeds_v2,
                                         all_maps)
 
-everything_joined_v2 %>%
-  pull(location) %>%
-  min(na.rm = TRUE) %>%
+everything_joined_v2 |>
+  pull(location) |>
+  min(na.rm = TRUE) |>
   print()
 
 # Currently yields same result as for part 1.

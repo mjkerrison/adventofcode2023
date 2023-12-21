@@ -5,7 +5,7 @@ extract_calibration_digits <- function(strings_in,
 
   map_chr(strings_in, function(string_i){
 
-    digits <- search_function(string_i, search_string) %>% unlist()
+    digits <- search_function(string_i, search_string) |> unlist()
 
     assert_that(
       length(digits) > 0,
@@ -86,6 +86,6 @@ extract_without_consuming <- function(string_in,
 
     .init = list()
 
-  ) %>% discard(is.na) # Tidy up any NAs...
+  ) |> discard(is.na) # Tidy up any NAs...
 
 }

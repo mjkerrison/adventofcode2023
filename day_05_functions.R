@@ -20,17 +20,17 @@ fetch_seed_table <- function(raw_lines){
 
   tibble(
 
-    seed = raw_lines %>%
+    seed = raw_lines |>
 
-      keep(\(x) str_starts(x, "seeds:")) %>%
+      keep(\(x) str_starts(x, "seeds:")) |>
 
-      str_squish() %>%
+      str_squish() |>
 
-      str_split(" ") %>%
+      str_split(" ") |>
 
-      unlist() %>%
+      unlist() |>
 
-      keep(\(x) str_starts(x, "[:digit:]")) %>%
+      keep(\(x) str_starts(x, "[:digit:]")) |>
 
       as.numeric()
 
@@ -86,14 +86,14 @@ fetch_input_map <- function(raw_lines,
   range_col <- glue("range_{source_label}_to_{destination_label}")
 
 
-  raw_lines[(line_initial + 1):(line_final - 1)] %>%
+  raw_lines[(line_initial + 1):(line_final - 1)] |>
 
     map(function(line_i){
 
-      components <- line_i %>%
-        str_squish() %>%
-        str_split(" ") %>%
-        unlist() %>%
+      components <- line_i |>
+        str_squish() |>
+        str_split(" ") |>
+        unlist() |>
         as.numeric()
 
       # Note also that the range logic means that you need to add the range - 1,
@@ -113,9 +113,9 @@ fetch_input_map <- function(raw_lines,
         )
       )
 
-    }) %>%
+    }) |>
 
-    bind_rows() %>%
+    bind_rows() |>
 
     return()
 
@@ -149,17 +149,17 @@ join_and_pinpoint <- function(table_x,
         {{ sym_from_end   }}
       ))
 
-  ) %>%
+  ) |>
 
     mutate(
       {{ sym_to }} := {{ sym_from }} - {{ sym_from_start }} + {{ sym_to_start }}
-    ) %>%
+    ) |>
 
     # And now the extra kicker from the guide: anything not mapped to something
     # else is mapped to itself. Easy to miss lol.
     mutate(
       {{ sym_to }} := coalesce( {{ sym_to }}, {{ sym_from }} )
-    ) %>%
+    ) |>
 
     # And we have to drop the extra info because otherwise we'd end up with like
     # soil_starts.x.x, soil_starts.x.y, soil_starts.y.x, ...

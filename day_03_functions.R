@@ -7,12 +7,12 @@ find_numbers <- function(lines_in){
 
       row = i,
 
-      number = line_i %>%
+      number = line_i |>
 
         # Split each line on anything that's not a digit:
-        str_split("[^0-9]") %>%
+        str_split("[^0-9]") |>
 
-        unlist() %>%
+        unlist() |>
 
         # Toss out anything that was just characters among characters:
         discard(\(x) any(x %in% c("")))
@@ -58,18 +58,18 @@ find_numbers <- function(lines_in){
 
       str_locate(line_i, tbl_split$number)
 
-    ) %>%
+    ) |>
 
       # mutate(
       #
       #   endpoints = (str_locate(line_i, number))
       #
-      # ) %>%
+      # ) |>
       #
-      # unpack(endpoints) %>%
+      # unpack(endpoints) |>
       identity()
 
-  }) %>%
+  }) |>
 
     bind_rows()
 
